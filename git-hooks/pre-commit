@@ -13,3 +13,11 @@ for x in ${files_to_encrypt[@]}; do
     fi
   done
 done
+
+changes_count=$(git diff --name-only --cached --diff-filter=AM | wc -l)
+
+if [ $changes_count -eq 0 ]; then
+  echo "No change, aborting..."
+  exit 1
+fi
+
