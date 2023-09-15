@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+files_added=$(git diff --name-only --cached --diff-filter=AM)
+
+for file in ${files_added[@]}; do
+  echo "$file"
+done
+

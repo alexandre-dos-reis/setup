@@ -6,7 +6,6 @@ for file in ${files_to_encrypt[@]}; do
   if ! grep -q '$ANSIBLE_VAULT' "$file"; then
     echo "Encrypting $file"
     ansible-vault encrypt --vault-password-file .vault $file
-    git add $file
     echo -en "\n"
   else
     echo "$file is already encrypted !"
