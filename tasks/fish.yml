@@ -1,0 +1,18 @@
+# - name: debug
+#   debug: msg="{{ ansible_distribution }}"
+- name: Install Fish on Ubuntu
+  become: true
+  when: ansible_distribution == "Ubuntu"
+  apt:
+    name: fish
+  tags:
+    - ubuntu
+
+- name: Install Fish on MacOSX
+  become: true
+  when: ansible_distribution == "MacOSX"
+  homebrew:
+    name: fish
+  tags:
+    - macosx
+# https://frontendmasters.com/courses/developer-productivity/creating-ansible-tasks-to-install-zsh/

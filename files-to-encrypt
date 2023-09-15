@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+files_to_encrypt=(
+  ".ssh/id_ed25519" 
+)

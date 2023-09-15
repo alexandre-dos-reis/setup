@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+source files-to-encrypt
+
+for file in ${files_to_encrypt[@]}; do
+  if grep -q '$ANSIBLE_VAULT' "$file"; then
+    echo "Decrypting $file"
+    ansible-vault decrypt --vault-password-file .vault $file
+    echo -en "\n"
+  else
+    echo "$file is already decrypted !"
+  fi
+done

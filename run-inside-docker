@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+IMAGE=ansible-test-env
+
+docker image rm -f $IMAGE
+docker build . -t $IMAGE
+# docker run --rm -v ${PWD}:/home/alex/ansible -it $IMAGE
+docker run --rm -it $IMAGE
