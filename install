@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+# git config core.hooksPath ./git-hooks
+
+packages=(
+  "git"
+  "ansible"
+  "docker"
+)
+
+if [[ "$OSTYPE" == "darwin"* ]]; then # Mac OSX 
+  echo "Running installation on Mac OSX"
+  # Install Brew
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  for p in ${packages[@]}; do
+    echo "Installing $p..."
+    brew install $p
+    echo " "
+  done
+
+fi
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then # Linux
+  echo "Running installation on Linux"
+  # TODO: Install last verion of packages
+
+  for p in ${packages[@]}; do
+    apt-get install $p -y
+  done
+fi
+

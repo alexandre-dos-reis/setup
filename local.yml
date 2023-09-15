@@ -1,7 +1,0 @@
----
-- hosts: localhost
-  tasks:
-    # install ssh keys first !
-    - import_tasks: tasks/ssh.yml
-    # - import_tasks: tasks/chezmoi.yml
-    # - import_tasks: tasks/fish.yml

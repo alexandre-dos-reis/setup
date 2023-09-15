@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  tasks:
+    - import_tasks: tasks/ssh.yml
+    - import_tasks: tasks/chezmoi.yml
+    # - import_tasks: tasks/utils.yml
+    # - import_tasks: tasks/nodejs.yml
+    # - import_tasks: tasks/bun.yml
+    # - import_tasks: tasks/rust.yml
+    - import_tasks: tasks/fish.yml
+    # - import_tasks: tasks/terminal.yml

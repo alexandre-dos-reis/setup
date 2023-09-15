@@ -1,5 +1,5 @@
 - name: Install chezmoi
   shell: sh -c "$(curl -fsLS get.chezmoi.io)"
-#
-- name: Initialize chezmoi
-  command: ~/bin/chezmoi init --apply --ssh alexandre-dosreis
+
+- name: Initialize chezmoi from github
+  command: ~/bin/chezmoi init --apply alexandre-dos-reis

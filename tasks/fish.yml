@@ -1,18 +1,49 @@
-# - name: debug
-#   debug: msg="{{ ansible_distribution }}"
-- name: Install Fish on Ubuntu
-  become: true
+# For Ubuntu
+- name: Add fish repository
   when: ansible_distribution == "Ubuntu"
+  become: true
+  apt_repository:
+    repo: ppa:fish-shell/release-3
+    state: present
+
+- name: Install Fish on Ubuntu
+  when: ansible_distribution == "Ubuntu"
+  become: true
   apt:
     name: fish
-  tags:
-    - ubuntu
 
+# For MacOSX
 - name: Install Fish on MacOSX
-  become: true
   when: ansible_distribution == "MacOSX"
+  become: true
   homebrew:
     name: fish
-  tags:
-    - macosx
-# https://frontendmasters.com/courses/developer-productivity/creating-ansible-tasks-to-install-zsh/
+###
+
+- name: Install Fisher | Fish plugin manager
+  shell:
+    executable: /usr/bin/fish
+    cmd: curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+
+- name: Install Fisher plugins
+  shell:
+    executable: /usr/bin/fish
+    cmd: "fisher install {{ item }}"
+  loop:
+    - jorgebucaran/autopair.fish
+    - ilancosman/tide@v5
+    - jhillyerd/plugin-git
+    - jorgebucaran/nvm.fish # Node must be installed first !
+    - catppuccin/fish
+
+- name: Install MacOSX Fisher plugins
+  when: ansible_distribution == "MacOSX"
+  shell:
+    executable: /usr/bin/fish
+    cmd: fisher install nifoc/ssh-agent-macos.fish
+
+- name: Make fish the shell
+  become: true
+  user:
+    name: alex
+    shell: /usr/bin/fish
