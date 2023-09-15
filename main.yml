@@ -1,7 +1,7 @@
 ---
 - hosts: localhost
   tasks:
-    - import_tasks: tasks/ssh.yml
+    # - import_tasks: tasks/ssh.yml
     - import_tasks: tasks/chezmoi.yml
     # - import_tasks: tasks/utils.yml
     # - import_tasks: tasks/nodejs.yml

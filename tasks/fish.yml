@@ -1,5 +1,5 @@
 # For Ubuntu
-- name: Add fish repository
+- name: Add fish repository on Ubuntu
   when: ansible_distribution == "Ubuntu"
   become: true
   apt_repository:

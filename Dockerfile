@@ -25,5 +25,6 @@ WORKDIR /home/alex
 
 FROM alex
 COPY --chown=alex:alex . .
-CMD ["ansible-playbook", "main.yml", "--extra-vars", "ansible_become_password='alex'"]
+CMD ["sh", "-c", "ansible-playbook main.yml --extra-vars ansible_become_password='alex'"]
+# CMD ["ansible-playbook", "$TAGS", "main.yml", "--extra-vars", "ansible_become_password='alex'"]
 
