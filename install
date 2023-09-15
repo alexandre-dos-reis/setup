@@ -34,5 +34,6 @@ fi
 
 
 # Enale git pre commit hooks !
+# https://dev.to/krzysztofkaczy9/do-you-really-need-husky-247b
 git config core.hooksPath ./git-hooks
 
