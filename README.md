@@ -1,4 +1,6 @@
-# Ansible
+# Setup
+
+Allow running a MacOs or Ubuntu with ansible in minutes !
 
 ## Ressources
 
