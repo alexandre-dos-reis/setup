@@ -26,7 +26,13 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then # Linux
   # TODO: Install last verion of packages
 
   for p in ${packages[@]}; do
+    echo "Installing $p..."
     apt-get install $p -y
+    echo " "
   done
 fi
+
+
+# Enale git pre commit hooks !
+git config core.hooksPath ./git-hooks
 
