@@ -13,5 +13,3 @@ for x in ${files_to_encrypt[@]}; do
     fi
   done
 done
-
-
