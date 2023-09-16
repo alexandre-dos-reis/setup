@@ -18,16 +18,16 @@
   become: true
   homebrew:
     name: fish
-###
 
+# Fisher, Fish plugin manager
 - name: Install Fisher | Fish plugin manager
   shell:
-    executable: /usr/bin/fish
+    executable: "{{ fish.bin }}"
     cmd: curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
 
 - name: Install Fisher plugins
   shell:
-    executable: /usr/bin/fish
+    executable: "{{ fish.bin }}"
     cmd: "fisher install {{ item }}"
   loop:
     - jorgebucaran/autopair.fish
@@ -39,11 +39,11 @@
 - name: Install MacOSX Fisher plugins
   when: ansible_distribution == "MacOSX"
   shell:
-    executable: /usr/bin/fish
+    executable: "{{ fish.bin }}"
     cmd: fisher install nifoc/ssh-agent-macos.fish
 
-- name: Make fish the shell
+- name: Make fish the default shell
   become: true
   user:
     name: alex
-    shell: /usr/bin/fish
+    shell: "{{ fish.bin }}"

@@ -1,5 +1,10 @@
 ---
 - hosts: localhost
+  vars:
+    github:
+      user: alexandre-dos-reis
+    fish:
+      bin: /usr/bin/fish
   tasks:
     # - import_tasks: tasks/ssh.yml
     - import_tasks: tasks/chezmoi.yml

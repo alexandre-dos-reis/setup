@@ -2,4 +2,4 @@
   shell: sh -c "$(curl -fsLS get.chezmoi.io)"
 
 - name: Initialize chezmoi from github
-  command: ~/bin/chezmoi init --apply alexandre-dos-reis
+  command: ~/bin/chezmoi init --apply "{{ github.user }}"
