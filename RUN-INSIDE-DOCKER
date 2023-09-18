@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 
-# inputs is waiting for the following options:
-# - ubuntu
+# Input is waiting for one of the following options:
 # - arch
+# - ubuntu
 
-ARCHITECTURE=${1:-"arch"}
-DOCKERFILE="Dockerfile.$ARCHITECTURE"
+DISTRO=${1:-"arch"}
+DOCKERFILE="Dockerfile.$DISTRO"
 
 if ! test -f $DOCKERFILE; then
     echo "This $DOCKERFILE doesn't exists !"
     exit 1
 fi
 
-IMAGE_NAME="${ARCHITECTURE}_ansible"
+IMAGE_NAME="${DISTRO}_ansible"
 
 docker build --file $DOCKERFILE -t $IMAGE_NAME .
 docker run --rm -it $IMAGE_NAME bash
