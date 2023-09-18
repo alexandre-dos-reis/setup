@@ -21,8 +21,4 @@ WORKDIR /home/alex
 
 FROM user
 COPY --chown=alex:alex . .
-CMD ["sh", "-c", "ansible-playbook main.yml \
-  --vault-password-file .vault \
-  --extra-vars ansible_become_password='alex'"]
-
-
+CMD ["./RUN"]

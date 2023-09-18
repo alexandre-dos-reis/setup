@@ -15,4 +15,4 @@ fi
 IMAGE_NAME="${DISTRO}_ansible"
 
 docker build --file $DOCKERFILE -t $IMAGE_NAME .
-docker run --rm -it $IMAGE_NAME bash
+docker run --rm -it $IMAGE_NAME
