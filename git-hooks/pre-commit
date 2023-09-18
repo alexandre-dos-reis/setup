@@ -2,22 +2,12 @@
 
 source files-to-encrypt
 
-files_added=$(git diff --name-only --cached --diff-filter=AM)
-
-for x in ${files_to_encrypt[@]}; do
-  for y in ${files_added[@]}; do
-    if [ "$x" = "$y" ]; then
-      echo "Change were made on sensitive file $x, restoring... !"
-      git restore --staged $x
-      git restore $x
-    fi
-  done
+for file in ${files_to_encrypt[@]}; do
+  if ! grep -q '$ANSIBLE_VAULT' "$file"; then
+    echo "$file is not encrypted, run the ENCRYPT command !"
+    exit 1
+  fi
 done
 
-changes_count=$(git diff --name-only --cached --diff-filter=AM | wc -l)
 
-if [ $changes_count -eq 0 ]; then
-  echo "No change, aborting..."
-  exit 1
-fi
 
