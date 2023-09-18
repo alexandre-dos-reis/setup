@@ -9,4 +9,5 @@ Allow running a MacOs or Ubuntu with ansible in minutes !
 
 ## Todos
 
-- Added Auth codes 2fa
+- Added Auth codes 2fa if needed !
+- Change the location of chezmoi bin to `/usr/local/bin`

@@ -1,39 +1,45 @@
 #!/usr/bin/env bash
 
-# git config core.hooksPath ./git-hooks
-
 packages=(
-  "git"
   "ansible"
-  "docker"
 )
 
-if [[ "$OSTYPE" == "darwin"* ]]; then # Mac OSX 
-  echo "Running installation on Mac OSX"
+# Mac OSX 
+if [[ "$OSTYPE" == "darwin"* ]]; then
   # Install Brew
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  if ! [ -x "$(command -v brew)" ]; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
 
+  # Installing packages if not found
   for p in ${packages[@]}; do
-    echo "Installing $p..."
-    brew install $p
-    echo " "
+    if ! [ -x "$(command -v $p)" ]; then
+      echo "Installing $p..."
+      brew install $p
+      echo " "
+    else
+      echo "$p is already installed !"
+    fi
   done
 
 fi
 
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then # Linux
-  echo "Running installation on Linux"
-  # TODO: Install last verion of packages
 
-  for p in ${packages[@]}; do
-    echo "Installing $p..."
-    apt-get install $p -y
-    echo " "
-  done
-fi
+# TODO !
+# if [[ "$OSTYPE" == "linux-gnu"* ]]; then # Linux
+#   echo "Running installation on Linux"
+#   # TODO: Install last version of packages
+#
+#   for p in ${packages[@]}; do
+#     echo "Installing $p..."
+#     apt-get install $p -y
+#     echo " "
+#   done
+# fi
 
 
-# Enale git pre commit hooks !
+# Enable git pre commit hooks !
 # https://dev.to/krzysztofkaczy9/do-you-really-need-husky-247b
 git config core.hooksPath ./git-hooks
 
+source RUN
