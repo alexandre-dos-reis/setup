@@ -1,4 +1,17 @@
-# TODO
-# install exa, vscode, neovim
-# Create dev folder
-# Install some repos: documents-officiels, keyboards,
+# MAC OSX
+#
+- name: Install utils v1 for MacOSX
+  when: ansible_distribution == "MacOSX"
+  become: true
+  homebrew:
+    name: "{{ item }}"
+  loop: "{{ utils_v1 }}"
+
+# ARCH
+#
+- name: Install utils v1 for Arch
+  when: ansible_distribution == "Archlinux"
+  become: true
+  pacman:
+    name: "{{ item }}"
+  loop: "{{ utils_v1 }}"

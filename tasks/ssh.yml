@@ -1,2 +1,17 @@
-- name: Install chezmoi
-  shell: sh -c "$(curl -fsLS get.chezmoi.io)"
+- name: Ensure .ssh directory exists.
+  file:
+    dest: "{{ ssh.dest_key | dirname }}"
+    mode: 0700
+    state: directory
+
+- name: Install ssh key
+  copy:
+    src: "{{ ssh.source_key }}"
+    dest: "{{ ssh.dest_key }}"
+    mode: 0600
+
+- name: Install ssh key public
+  copy:
+    src: "{{ ssh.source_key }}.pub"
+    dest: "{{ ssh.dest_key }}.pub"
+    mode: 0644

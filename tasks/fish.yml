@@ -12,6 +12,13 @@
   apt:
     name: fish
 
+# For Arch
+- name: Install Fish on Arch
+  when: ansible_distribution == "Archlinux"
+  become: true
+  pacman:
+    name: fish
+
 # For MacOSX
 - name: Install Fish on MacOSX
   when: ansible_distribution == "MacOSX"
@@ -40,7 +47,17 @@
   when: ansible_distribution == "MacOSX"
   shell:
     executable: "{{ fish.bin }}"
-    cmd: fisher install nifoc/ssh-agent-macos.fish
+    cmd: "fisher install {{ item }}"
+  loop:
+    - nifoc/ssh-agent-macos.fish
+
+- name: Install Ubuntu Fisher plugins
+  when: ansible_distribution == "Ubuntu"
+  shell:
+    executable: "{{ fish.bin }}"
+    cmd: "fisher install {{ item }}"
+  loop:
+    - danhper/fish-ssh-agent # need to launch once "ssh-add"
 
 - name: Make fish the default shell
   become: true

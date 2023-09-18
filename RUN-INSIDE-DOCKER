@@ -1,7 +1,18 @@
 #!/usr/bin/env bash
 
-IMAGE=ansible-test-env
+# inputs is waiting for the following options:
+# - ubuntu
+# - arch
 
-# docker image rm -f $IMAGE
-docker build . -t $IMAGE
-docker run --rm -it $IMAGE
+ARCHITECTURE=${1:-"arch"}
+DOCKERFILE="Dockerfile.$ARCHITECTURE"
+
+if ! test -f $DOCKERFILE; then
+    echo "This $DOCKERFILE doesn't exists !"
+    exit 1
+fi
+
+IMAGE_NAME="${ARCHITECTURE}_ansible"
+
+docker build --file $DOCKERFILE -t $IMAGE_NAME .
+docker run --rm -it $IMAGE_NAME bash

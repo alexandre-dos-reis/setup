@@ -1,16 +1,21 @@
 ---
 - hosts: localhost
   vars:
+    ssh:
+      source_key: "./.ssh/id_ed25519"
+      dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519"
     github:
       user: alexandre-dos-reis
     fish:
       bin: /usr/bin/fish
+    utils_v1: ["htop", "gnupg", "exa", "jq"]
   tasks:
-    # - import_tasks: tasks/ssh.yml
+    - import_tasks: tasks/ssh.yml
     - import_tasks: tasks/chezmoi.yml
-    # - import_tasks: tasks/utils.yml
+    - import_tasks: tasks/fish.yml
+    - import_tasks: tasks/utils.yml
+    # - import_tasks: tasks/apps.yml
     # - import_tasks: tasks/nodejs.yml
     # - import_tasks: tasks/bun.yml
     # - import_tasks: tasks/rust.yml
-    - import_tasks: tasks/fish.yml
     # - import_tasks: tasks/terminal.yml
