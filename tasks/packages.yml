@@ -1,0 +1,20 @@
+- name: Install packages for MacOSX
+  when: ansible_distribution == "MacOSX"
+  become: true
+  loop: "{{ packages }}"
+  homebrew:
+    name: "{{ item }}"
+
+- name: Install packages for Arch
+  when: ansible_distribution == "Archlinux"
+  become: true
+  loop: "{{ packages }}"
+  pacman:
+    name: "{{ item }}"
+
+- name: Install packages for Ubuntu
+  when: ansible_distribution == "Ubuntu"
+  become: true
+  loop: "{{ packages + ['apt-transport-https'] }}"
+  apt:
+    name: "{{ item }}"

@@ -1,0 +1,31 @@
+- name: Install NodeJs and Npm on Arch
+  when: ansible_distribution == "Archlinux"
+  become: true
+  loop: ["nodejs", "npm"]
+  pacman:
+    name: "{{ item }}"
+
+- name: Install NodeJs and Npm on MacOSX
+  when: ansible_distribution == "MacOSX"
+  become: true
+  loop: ["node", "npm"]
+  homebrew:
+    name: "{{ item }}"
+
+- name: Install NodeJs and Npm on Ubuntu
+  when: ansible_distribution == "Ubuntu"
+  become: true
+  loop: ["nodejs", "npm"]
+  apt:
+    name: "{{ item }}"
+
+- name: Install Yarn, Pnpm, N
+  become: true
+  loop: ["yarn", "pnpm", "n"]
+  npm:
+    name: "{{ item }}"
+    global: yes
+
+- name: Install n
+  become: true
+  shell: n lts

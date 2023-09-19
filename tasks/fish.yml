@@ -33,31 +33,22 @@
     cmd: curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
 
 - name: Install Fisher plugins
+  loop: "{{ fish.plugins }}"
   shell:
     executable: "{{ fish.bin }}"
     cmd: "fisher install {{ item }}"
-  loop:
-    - jorgebucaran/autopair.fish
-    - ilancosman/tide@v5
-    - jhillyerd/plugin-git
-    - jorgebucaran/nvm.fish # Node must be installed first !
-    - catppuccin/fish
 
 - name: Install MacOSX Fisher plugins
   when: ansible_distribution == "MacOSX"
   shell:
     executable: "{{ fish.bin }}"
-    cmd: "fisher install {{ item }}"
-  loop:
-    - nifoc/ssh-agent-macos.fish
+    cmd: fisher install nifoc/ssh-agent-macos.fish
 
-- name: Install Ubuntu Fisher plugins
-  when: ansible_distribution == "Ubuntu"
+- name: Install Linux Fisher plugins
+  when: ansible_distribution != "MacOSX"
   shell:
     executable: "{{ fish.bin }}"
-    cmd: "fisher install {{ item }}"
-  loop:
-    - danhper/fish-ssh-agent # need to launch once "ssh-add"
+    cmd: fisher install danhper/fish-ssh-agent
 
 - name: Make fish the default shell
   become: true

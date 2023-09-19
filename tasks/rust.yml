@@ -1,0 +1,14 @@
+- name: Download Rust Installer
+  get_url:
+    url: https://sh.rustup.rs
+    dest: /tmp/sh.rustup.rs
+    mode: "0755"
+    force: "yes"
+
+- name: Install Rust/Cargo
+  shell: /tmp/sh.rustup.rs -y
+
+- name: Remove rust install
+  file:
+    path: /tmp/sh.rustup.rs -y
+    state: absent

@@ -1,0 +1,42 @@
+# Arch
+- name: Install neovim pre-requesites on Arch
+  when: ansible_distribution == "Archlinux"
+  become: true
+  loop: "{{ neovim.deps + ['base-devel'] }}"
+  pacman:
+    name: "{{ item }}"
+
+- name: Install neovim on Arch
+  when: ansible_distribution == "Archlinux"
+  become: true
+  pacman:
+    name: "neovim"
+
+# MaxOSX
+- name: Install neovim pre-requesites on MacOSX
+  when: ansible_distribution == "MacOSX"
+  become: true
+  loop: "{{ neovim.deps }}"
+  homebrew:
+    name: "{{ item }}"
+
+- name: Install neovim on MacOSX
+  when: ansible_distribution == "MacOSX"
+  become: true
+  loop: ["visual-studio-code", "neovim"]
+  homebrew:
+    name: "neovim"
+
+# Ubuntu
+- name: Install neovim pre-requesites on Ubuntu
+  when: ansible_distribution == "Ubuntu"
+  become: true
+  loop: "{{ neovim.deps + ['build-essential'] }}"
+  apt:
+    name: "{{ item }}"
+
+- name: Install neovim on Ubuntu
+  when: ansible_distribution == "Ubuntu"
+  become: true
+  apt:
+    name: "neovim"

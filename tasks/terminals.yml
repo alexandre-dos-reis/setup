@@ -1,0 +1,20 @@
+- name: Install terminals on Arch
+  when: ansible_distribution == "Archlinux"
+  become: true
+  loop: "{{ terminals }}"
+  pacman:
+    name: "{{ item }}"
+
+- name: Install terminals on MacOSX
+  when: ansible_distribution == "MacOSX"
+  become: true
+  loop: "{{ terminals + ['iterm2'] }}"
+  homebrew_cask:
+    name: "{{ item }}"
+
+- name: Install terminals on Ubuntu
+  when: ansible_distribution == "Ubuntu"
+  become: true
+  loop: "{{ terminals }}"
+  apt:
+    name: "{{ item }}"

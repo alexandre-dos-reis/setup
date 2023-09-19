@@ -1,0 +1,17 @@
+- name: Install Golang on Arch
+  when: ansible_distribution == "Archlinux"
+  become: true
+  pacman:
+    name: go
+
+- name: Install Golang on MacOSX
+  when: ansible_distribution == "MacOSX"
+  become: true
+  homebrew:
+    name: go
+
+- name: Install Golang on Ubuntu
+  when: ansible_distribution == "Ubuntu"
+  become: true
+  apt:
+    name: golang-go

@@ -12,7 +12,9 @@ if ! test -f $DOCKERFILE; then
     exit 1
 fi
 
-IMAGE_NAME="${DISTRO}_ansible"
+IMAGE_NAME="${DISTRO}_ansible_setup"
 
-docker build --file $DOCKERFILE -t $IMAGE_NAME .
-docker run --rm -it $IMAGE_NAME
+
+docker image rm -f $IMAGE_NAME
+docker build --no-cache --file $DOCKERFILE -t $IMAGE_NAME .
+docker run --rm -it $IMAGE_NAME bash

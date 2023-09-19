@@ -3,10 +3,14 @@ WORKDIR /usr/local/bin
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y software-properties-common curl git build-essential && \
+    apt-get install -y \
+      software-properties-common \
+      curl \
+      build-essential \
+      sudo && \
     apt-add-repository -y ppa:ansible/ansible && \
     apt-get update && \
-    apt-get install -y curl git ansible vim build-essential sudo && \
+    apt-get install -y ansible && \
     apt-get clean autoclean && \
     apt-get autoremove --yes
 
@@ -15,7 +19,7 @@ RUN groupadd -f alex
 RUN useradd \
   --create-home \
   --gid alex \
-  --groups sudo \
+  --groups alex \
   --shell /bin/bash \
   --password $(echo "alex" | openssl passwd -1 -stdin) \
   alex
@@ -25,4 +29,4 @@ WORKDIR /home/alex
 
 FROM alex
 COPY --chown=alex:alex . .
-CMD ["sh", "-c", "./RUN"]
+CMD ["./RUN"]

@@ -3,5 +3,4 @@
 BECOME_PASS=${1:-"alex"}
 
 ansible-playbook main.yml \
-  --vault-password-file .vault \
   --extra-vars ansible_become_password=$BECOME_PASS

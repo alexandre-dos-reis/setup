@@ -2,7 +2,7 @@ FROM menci/archlinuxarm AS base
 WORKDIR /usr/local/bin
 RUN pacman -Sy && \
     pacman -Syu --noconfirm && \
-    pacman -S curl git vim sudo ansible --noconfirm && \
+    pacman -S curl sudo ansible --noconfirm && \
     echo '%wheel ALL=(ALL:ALL) ALL' | sudo EDITOR='tee -a' visudo
 
 FROM base AS user
@@ -14,7 +14,6 @@ RUN useradd \
   --shell /bin/bash \
   --password $(echo "alex" | openssl passwd -1 -stdin) \
   alex
-RUN cat /etc/sudoers
 RUN usermod -aG wheel alex
 USER alex
 WORKDIR /home/alex

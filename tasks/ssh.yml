@@ -10,7 +10,7 @@
     dest: "{{ ssh.dest_key }}"
     mode: 0600
 
-- name: Install ssh key public
+- name: Install public ssh key
   copy:
     src: "{{ ssh.source_key }}.pub"
     dest: "{{ ssh.dest_key }}.pub"
