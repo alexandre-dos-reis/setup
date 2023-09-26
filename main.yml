@@ -22,6 +22,7 @@
       - wget
       - curl
       - fzf
+      - bat
       - htop
       - gnupg
       - exa
