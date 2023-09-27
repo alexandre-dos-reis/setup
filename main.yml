@@ -19,6 +19,7 @@
       - git
       - unzip
       - openssh
+      - telnet
       - wget
       - curl
       - fzf
