@@ -1,6 +1,6 @@
 ---
 - hosts: localhost
-  connection: local
+  # connection: local
   vars:
     ssh:
       source_key: "./.ssh/id_ed25519"
