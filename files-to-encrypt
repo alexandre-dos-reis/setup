@@ -3,6 +3,6 @@
 files_to_encrypt=(
 	".ssh/id_ed25519"
 	".ssh/id_ed25519_old"
-	".secrets/payfit.yml"
-	".secrets/gh-recovery-codes"
+	".2fa-recovery/payfit"
+	".2fa-recovery/gh"
 )
