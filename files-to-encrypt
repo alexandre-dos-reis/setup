@@ -1,8 +1,3 @@
 #!/usr/bin/env bash
 
-files_to_encrypt=(
-	".ssh/id_ed25519"
-	".ssh/id_ed25519_old"
-	".2fa-recovery/payfit"
-	".2fa-recovery/gh"
-)
+files_to_encrypt=$(find .ssh .2fa-recovery -type f)
